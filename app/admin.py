@@ -1,20 +1,21 @@
 from django.contrib import admin
 from app.models import *
 
-# Register your models here.
+# Traer clases definidas en el modelo.
 admin.site.register(Tecnica)
 admin.site.register(Estilo)
 admin.site.register(TipoRestauracion)
 admin.site.register(Especialidad)
 admin.site.register(Restaurador)
 admin.site.register(Restauracion)
+admin.site.register(Artista)
 admin.site.register(Obra)
 
-'''
+
 class RestauracionInline(admin.TabularInline):
     model = Restauracion
     extra = 0
-
+'''
 @admin.register(Restauracion)
 class RestauracionAdmin(admin.ModelAdmin):
     inlines = [
@@ -26,7 +27,7 @@ class RestauracionAdmin(admin.ModelAdmin):
     ordering = ['precio']  # -nombre escendente, nombre ascendente
     search_fields = ['precio']
     list_filter = (
-        'precios',  #que filtre por nombre
+        'precios',  #que filtre por precio
     )
 '''
 

@@ -108,7 +108,8 @@ class Restauracion(models.Model):
     )
     fecha_reingreso = models.DateField(
         _('fecha de reingreso ingreso'),
-        help_text=_('fecha de primer ingreso de la obra')
+        help_text=_('fecha de primer ingreso de la obra'),
+        null=True
     )
     fecha_salida = models.DateField(
         _('fecha de salida'),
@@ -138,6 +139,18 @@ class Restauracion(models.Model):
         on_delete=models.SET_NULL,
         blank = False,
         null = True
+    )
+
+class Artista(models.Model):
+    apellido = models.CharField(    
+        _('Apellido'),              
+        help_text=_('Apellido del artista'), 
+        max_length=200,  
+    )
+    nombre = models.CharField(    
+        _('Nombre'),              
+        help_text=_('Nombre del artista'), 
+        max_length=200,  
     )
 
 class Obra(models.Model):
@@ -196,6 +209,15 @@ class Obra(models.Model):
         Restauracion,
         verbose_name=_('Restauración'),
         help_text=_('Restauraciones de obra'),
+        related_name='%(app_label)s_%(class)s_related',
+        on_delete=models.SET_NULL,
+        blank = True,
+        null = True
+    )
+    artista = models.ForeignKey(
+        Artista,
+        verbose_name=_('Artista'),
+        help_text=_('Artista creador de la'),
         related_name='%(app_label)s_%(class)s_related',
         on_delete=models.SET_NULL,
         blank = True,
