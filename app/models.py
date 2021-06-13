@@ -2,6 +2,7 @@ from django.db import models
 from django.db import models  
 from django.utils.translation import ugettext_lazy as _  #conversión de idiomas
 from django.contrib.auth.models import User              #trae los usuarios logueados en el sistema.
+from django.core.validators import MinValueValidator
 
 class Tecnica(models.Model):
     descripcion = models.TextField(
@@ -113,9 +114,12 @@ class Restauracion(models.Model):
         _('fecha de salida'),
         help_text=_('fecha de salida de la obra')
     )
-    precio = models.FloatField(
+    precio = models.DecimalField(
         _('Precio de la reparación'),
-        help_text=_('precio de la reparación')
+        help_text=_('precio de la reparación'),
+        max_digits=10, 
+        decimal_places=2,
+        validators=[MinValueValidator(('0.01'))]
     )
     restaurador = models.ForeignKey(
         Restaurador,
