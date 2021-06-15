@@ -1,1 +1,20 @@
-SELECT nombre From app_estilo WHERE descripcion LIKE '%colores%';
+Los PK son app_tabla.id
+se invoca el atributo mediante el "."
+las FK son app_tabla_id
+
+--Salvucci
+
+select app_obra.id, app_obra.nombre, app_estilo.nombre, app_estilo.descripcion from app_obra 
+inner join app_estilo on (app_obra.estilo_id=app_estilo.id) where app_obra.nombre = UPPER('PACHI GRITA');
+
+--Taborda
+
+select app_artista.id as "ID ARTISTA", LOWER(app_artista.nombre) ||','|| UPPER(app_artista.apellido) as "ApellidoYNombre", app_obra.nombre from app_artista
+inner join app_obra on (app_obra.artista_id=app_artista.id);
+
+--Morello
+
+select app_obra.id, app_obra.nombre, sum(app_restauracion.precio) as costo_restauraciones_total, app_restauracion.fecha_reingreso from app_obra inner join app_restauracion on (app_obra.restauracion_id=app_restauracion.id) where extract (year from app_restauracion.fecha_reingreso)= 2020 and extract (month from app_restauracion.fecha_reingreso)= 04 group by 1,4;
+
+create view _00001costos_restauracion as (select app_obra.id, app_obra.nombre, sum(app_restauracion.precio) as costo_restauraciones_total, app_restauracion.fecha_reingreso from app_obra inner join app_restauracion on (app_obra.restauracion_id=app_restauracion.id) where extract (year from app_restauracion.fecha_reingreso)= 2020 and extract (month from app_restauracion.fecha_reingreso)= 04 group by 1,4);
+select sum(_00001costos_restauracion.costo_restauraciones_total) as costo_junio2021 from _00001costos_restauracion;

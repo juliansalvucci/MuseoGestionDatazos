@@ -1,5 +1,6 @@
 from django.db import models
-from django.db import models  
+from django.db import models
+from django.db.models.deletion import SET_NULL  
 from django.utils.translation import ugettext_lazy as _  #conversión de idiomas
 from django.contrib.auth.models import User              #trae los usuarios logueados en el sistema.
 from django.core.validators import MinValueValidator
@@ -145,9 +146,9 @@ class Restauracion(models.Model):
     precio = models.DecimalField(
         _('Precio de la reparación'),
         help_text=_('precio de la reparación'),
-        max_digits=10, 
+        max_digits=15, 
         decimal_places=2,
-        validators=[MinValueValidator(('0.01'))]
+        default = 0
     )
     restaurador = models.ForeignKey(
         Restaurador,
@@ -205,7 +206,7 @@ class Obra(models.Model):
         help_text=_('valuación en pesos'),
         max_digits=10, 
         decimal_places=2,
-        validators=[MinValueValidator(('0.01'))]
+        default = 0
     )
     alto = models.IntegerField(
         _('alto'),
@@ -245,7 +246,7 @@ class Obra(models.Model):
         blank = False,
         null = True
     )
-    restauración = models.ForeignKey(
+    restauracion = models.ForeignKey(
         Restauracion,
         verbose_name=_('Restauración'),
         help_text=_('Restauraciones de obra'),
@@ -268,7 +269,28 @@ class Obra(models.Model):
     def __str__(self):   
         return '{}'.format(self.nombre)
 
-
+class RestauradorEspecialidad(models.Model):
+    especialidad = models.ForeignKey(
+        Especialidad,
+        verbose_name=_('Especialidad'),
+        related_name='%(app_label)s_%(class)s_related',
+        on_delete=models.SET_NULL,
+        blank = True,
+        null = True
+    )
+    restaurador = models.ForeignKey(
+        Restaurador,
+        verbose_name=_('Restaurador'),
+        related_name='%(app_label)s_%(class)s_related',
+        on_delete=models.SET_NULL,
+        blank = True,
+        null = True
+    )
+    class Meta:
+        verbose_name = 'Restaurador por especialidad',
+        verbose_name_plural = 'Restaurador por especialidades'
+    def __str__(self):   
+        return '{}'.format(self.restaurador,self.especialidad)
 
 
 

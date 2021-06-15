@@ -10,6 +10,7 @@ admin.site.register(Restaurador)
 admin.site.register(Restauracion)
 admin.site.register(Artista)
 admin.site.register(Obra)
+admin.site.register(RestauradorEspecialidad)
 
 
 class RestauracionInline(admin.TabularInline):
