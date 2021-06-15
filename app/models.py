@@ -14,6 +14,8 @@ class Tecnica(models.Model):
         help_text=_('Nombre de la obra'), 
         max_length=200,  
     )
+    def __str__(self):   
+        return '{}'.format(self.nombre)
 
 class Estilo(models.Model):
     descripcion = models.TextField(
@@ -25,6 +27,8 @@ class Estilo(models.Model):
         help_text=_('Nombre del estilo aplicado'), 
         max_length=200,  
     )
+    def __str__(self):   
+        return '{}'.format(self.nombre)
 
 class TipoRestauracion(models.Model):
     descripcion = models.TextField(
@@ -36,6 +40,11 @@ class TipoRestauracion(models.Model):
         help_text=_('nombre tipo'), 
         max_length=200,  
     )
+    class Meta:
+        verbose_name = 'Tipo de restauración',
+        verbose_name_plural = 'Tipo de restauraciones'
+    def __str__(self):   
+        return '{}'.format(self.nombre)
 
 class Especialidad(models.Model):
     descripcion = models.TextField(
@@ -65,7 +74,15 @@ class Especialidad(models.Model):
         blank = False,
         null = True
     )
-
+    
+    class Meta:
+        ordering = ['nombre']
+        verbose_name = 'Especialidad',
+        verbose_name_plural = 'Especialidades'
+    
+    def __str__(self):  
+        return '{}'.format(self.nombre)
+    
 class Restaurador(models.Model):
     apellido = models.CharField(    
         _('Apellido'),              
@@ -105,8 +122,11 @@ class Restaurador(models.Model):
         null = True
     )
     class Meta:
+        ordering = ['nombre']
         verbose_name = 'Restaurador'
         verbose_name_plural = 'Restauradores'
+    def __str__(self):   
+        return '{} {}'.format(self.nombre,self.apellido)
 
 class Restauracion(models.Model):
     descripcion = models.TextField(
@@ -148,9 +168,12 @@ class Restauracion(models.Model):
         null = True
     )
     class Meta:
-        verbose_name = 'Restauración'
-        verbose_name = 'Restauracione'
-
+        ordering = ['fecha_reingreso']
+        verbose_name = 'Restauración',
+        verbose_name_plural = 'Restauraciones'
+    def __str__(self):  
+        return '{} {}'.format(self.fecha_reingreso,self.descripcion)
+    
 class Artista(models.Model):
     apellido = models.CharField(    
         _('Apellido'),              
@@ -162,6 +185,10 @@ class Artista(models.Model):
         help_text=_('Nombre del artista'), 
         max_length=200,  
     )
+    class Meta:
+        ordering = ['nombre']
+    def __str__(self):  
+        return '{} {}'.format(self.nombre, self.apellido)
 
 class Obra(models.Model):
     nombre = models.CharField(    
@@ -236,6 +263,10 @@ class Obra(models.Model):
         blank = True,
         null = True
     )
+    class Meta:
+        ordering = ['nombre']
+    def __str__(self):   
+        return '{}'.format(self.nombre)
 
 
 

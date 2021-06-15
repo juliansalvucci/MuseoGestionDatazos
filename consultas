@@ -1,0 +1,1 @@
+SELECT nombre From app_estilo WHERE descripcion LIKE '%colores%';
