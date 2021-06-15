@@ -3,16 +3,40 @@
         "model": "app.Tecnica",
         "pk": 1,
         "fields": {
-            "descripcion": "se pinta sobre lienzos",
-            "nombre": "pinceladas en lienzos"
+            "descripcion": "Aplicación de pintura sobre lienzo",
+            "nombre": "Pinceladas en lienzos"
+        }
+    },
+    {
+        "model": "app.Tecnica",
+        "pk": 2,
+        "fields": {
+            "descripcion": "Aplicación de pintura trazada en un solo sentido",
+            "nombre": "Trazo simple"
+        }
+    },
+    {
+        "model": "app.Tecnica",
+        "pk": 3,
+        "fields": {
+            "descripcion": "Pintura sobre acuarelas pastel",
+            "nombre": "Acuarela"
+        }
+    },
+    {
+        "model": "app.Estilo",
+        "pk": 1,
+        "fields": {
+            "descripcion": "de muchos colores",
+            "nombre": "Psicodélico"
         }
     },
     {
         "model": "app.Estilo",
         "pk": 2,
         "fields": {
-            "descripcion": "de muchos colores",
-            "nombre": "psicodélico"
+            "descripcion": "Implementa blanco y negro como pinturas predominantes",
+            "nombre": "Blanco y negro"
         }
     },
     {
@@ -24,8 +48,16 @@
         }
     },
     {
-        "model": "app.Especialidad",
+        "model": "app.TipoRestauracion",
         "pk": 2,
+        "fields": {
+            "descripcion": "parches de gamas de colores que se ajustan a la pintura vieja y fijan el color",
+            "nombre": "Pintura reparadora"
+        }
+    },
+    {
+        "model": "app.Especialidad",
+        "pk": 1,
         "fields": {
             "descripcion": "pinturas antiguas",
             "nombre": "clasicas"
@@ -33,45 +65,82 @@
     },
     {
         "model": "app.Restaurador",
-        "pk": 3,
+        "pk": 1,
         "fields": {
-            "nombre": "HUEVO",
-            "costo": "10.00",
-            "unidad_medida": 2
+            "apellido":"Morello",
+            "nombre": "Ezequiel",
+            "email": "pachiyangie@yahoo.com",
+            "calle": "25 de mayo",
+            "numero": "125",
+            "telefono": "35345678456"
+        }
+    },
+    {
+        "model": "app.Restaurador",
+        "pk": 2,
+        "fields": {
+            "apellido":"Taborda",
+            "nombre": "Alberto",
+            "email": "tabo4ever@hotmail.com.ar",
+            "calle": "Italia",
+            "numero": "1456",
+            "telefono": "35345678458"
         }
     },
     {
         "model": "app.Restauracion",
-        "pk": 4,
+        "pk": 1,
         "fields": {
             "descripcion": "restauracion por decoloración",
-            "fecha_reingreso": "12-01-20",
-            "fecha_salida": "12-02-20",
-            "precio":"12000",
+            "fecha_reingreso": "2020-04-22",
+            "fecha_salida": "2020-02-01",
+            "precio":"12000"
 
 
         }
     },
     {
         "model": "app.Artista",
-        "pk": 5,
+        "pk": 1,
         "fields": {
             "apellido": "Leonardi",
             "nombre": "Acel"
         }
     },
     {
+        "model": "app.Artista",
+        "pk": 2,
+        "fields": {
+            "apellido": "Saenz",
+            "nombre": "Alejandro"
+        }
+    },
+    {
         "model": "app.Obra",
-        "pk": 6,
+        "pk": 1,
         "fields": {
             "nombre": "PACHI GRITA",
-            "peso": "100.00",
+            "peso": "10",
             "valuacion": "100.000",
             "alto": "1000",
             "ancho": "1000",
             "descripcion": "Pachi gritando",
-            "fecha_creacion": "26-09-1999",
-            "fecha_primer_ingreso": "30-11-2004"
+            "fecha_creacion": "1999-04-20",
+            "fecha_primer_ingreso": "2004-01-01"
+        }
+    }
+    {
+        "model": "app.Obra",
+        "pk": 2,
+        "fields": {
+            "nombre": "Axel malo",
+            "peso": "50",
+            "valuacion": "500.000",
+            "alto": "1000",
+            "ancho": "1000",
+            "descripcion": "Un señor que se llama Axel y esta enojado",
+            "fecha_creacion": "1999-07-02",
+            "fecha_primer_ingreso": "2004-01-01"
         }
     }
 ]

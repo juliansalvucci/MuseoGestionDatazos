@@ -75,17 +75,21 @@ class Restaurador(models.Model):
     nombre = models.CharField(    
         _('Nombre'),              
         help_text=_('Nombre restaurador'), 
-        max_length=200,  
-    )
-    domicilio = models.CharField(    
-        _('Domicilio'),              
-        help_text=_('Domicilio del restaurador'), 
-        max_length=200,  
+        max_length=200
     )
     email = models.EmailField(
         _('E-mail'),
         help_text=_('Nombre restaurador'), 
         max_length=200, 
+    )
+    calle = models.CharField(
+        _('Calle'),
+        max_length=200, 
+        null = True,
+    )
+    numero = models.IntegerField(
+        _('Numero'),
+        null = True,
     )
     telefono = models.PositiveBigIntegerField(
         _('Teléfono'),
@@ -100,6 +104,9 @@ class Restaurador(models.Model):
         blank = False,
         null = True
     )
+    class Meta:
+        verbose_name = 'Restaurador'
+        verbose_name_plural = 'Restauradores'
 
 class Restauracion(models.Model):
     descripcion = models.TextField(
@@ -140,6 +147,9 @@ class Restauracion(models.Model):
         blank = False,
         null = True
     )
+    class Meta:
+        verbose_name = 'Restauración'
+        verbose_name = 'Restauracione'
 
 class Artista(models.Model):
     apellido = models.CharField(    
@@ -163,9 +173,12 @@ class Obra(models.Model):
         _('peso'),
         help_text=_('peso en kg')
     )
-    valuacion = models.IntegerField(
+    valuacion = models.DecimalField(
         _('valuación'),
-        help_text=_('valuación en pesos')
+        help_text=_('valuación en pesos'),
+        max_digits=10, 
+        decimal_places=2,
+        validators=[MinValueValidator(('0.01'))]
     )
     alto = models.IntegerField(
         _('alto'),
@@ -223,6 +236,7 @@ class Obra(models.Model):
         blank = True,
         null = True
     )
+
 
 
 
