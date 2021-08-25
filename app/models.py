@@ -1,6 +1,6 @@
 from django.db import models
 from django.db import models
-from django.db.models.deletion import SET_NULL  
+from django.db.models.deletion import CASCADE, SET_NULL  
 from django.utils.translation import ugettext_lazy as _  #conversión de idiomas
 from django.contrib.auth.models import User              #trae los usuarios logueados en el sistema.
 from django.core.validators import MinValueValidator
@@ -168,6 +168,15 @@ class Restauracion(models.Model):
         blank = False,
         null = True
     )
+    obra= models.ForeignKey(
+        "Obra",
+        verbose_name=_('Obra'),
+        help_text=_('Obra'),
+        related_name='%(app_label)s_%(class)s_related',
+        on_delete=models.SET_NULL,
+        blank = False,
+        null = True
+    )
     class Meta:
         ordering = ['fecha_reingreso']
         verbose_name = 'Restauración',
@@ -246,15 +255,15 @@ class Obra(models.Model):
         blank = False,
         null = True
     )
-    restauracion = models.ForeignKey(
-        Restauracion,
-        verbose_name=_('Restauración'),
-        help_text=_('Restauraciones de obra'),
-        related_name='%(app_label)s_%(class)s_related',
-        on_delete=models.SET_NULL,
-        blank = True,
-        null = True
-    )
+    #restauracion = models.ForeignKey(
+        #Restauracion,
+        #verbose_name=_('Restauración'),
+        #help_text=_('Restauraciones de obra'),
+        #related_name='%(app_label)s_%(class)s_related',
+        #on_delete=models.SET_NULL,
+        #blank = True,
+        #null = True
+    #)
     artista = models.ForeignKey(
         Artista,
         verbose_name=_('Artista'),
